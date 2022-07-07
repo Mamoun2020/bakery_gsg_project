@@ -23,15 +23,19 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldState = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldState,
       backgroundColor: ColorConst.primaryColor,
       appBar: AppBar(
         backgroundColor: ColorConst.primaryColor,
         elevation: 0.0,
         leading: InkWell(
-            onTap: () {},
+            onTap: () {
+              scaffoldState.currentState!.openDrawer();
+            },
             child: Image.asset(
               'assets/icons/menu.png',
               color: ColorConst.purple_500,
