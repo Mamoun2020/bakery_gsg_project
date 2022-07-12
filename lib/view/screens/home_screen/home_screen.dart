@@ -55,102 +55,107 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: MenuDrawer(),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 145.h,
-            child: CarouselSlider.builder(
-              itemBuilder: (BuildContext context, int index, int realIndex) =>
-                  WallpaperItem(
-                image: wallpapers[index].image!,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            SizedBox(
+              width: double.infinity,
+              height: 145.h,
+              child: CarouselSlider.builder(
+                itemBuilder: (BuildContext context, int index, int realIndex) => WallpaperItem(
+                  image: wallpapers[index].image!,
+
+                ),
+                itemCount: wallpapers.length,
+                options: CarouselOptions(
+                  scrollDirection: Axis.horizontal,
+                ),
               ),
-              itemCount: wallpapers.length,
-              options: CarouselOptions(
+
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Container(
+              height: 120.h,
+              padding: EdgeInsetsDirectional.only(
+                start: 8.0.w,
+              ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                itemCount: categories.length,
+                itemBuilder: (BuildContext context, int index) => CategoryItem(
+                  image: categories[index].image!,
+                  title: categories[index].title!,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(8.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('أحدث المنتجات',
+                      style: TextStyle(
+                        fontFamily: 'Abubhabimedia',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                        color: ColorConst.purple_500,
+                      )),
+                  Text('عرض الكل',
+                      style: TextStyle(
+                        fontFamily: 'Abubhabimedia',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp,
+                        color: ColorConst.purple_200,
+                        decoration: TextDecoration.underline,
+                      )),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 160.h,
+              width: double.infinity,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) => LatestProductsItem(
+                  image: latestProducts[index].image!,
+                  name: latestProducts[index].name!,
+                  price: latestProducts[index].price!,
+                ),
+                itemCount: latestProducts.length,
                 scrollDirection: Axis.horizontal,
               ),
             ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Container(
-            height: 120.h,
-            padding: EdgeInsetsDirectional.only(
-              start: 8.0.w,
-            ),
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (BuildContext context, int index) => CategoryItem(
-                image: categories[index].image!,
-                title: categories[index].title!,
+            Padding(
+              padding: EdgeInsets.all(8.0.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('المنتجات الأكثر طلبا',
+                      style: TextStyle(
+                        fontFamily: 'Abubhabimedia',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                        color: ColorConst.purple_500,
+                      )),
+                  Text('عرض الكل',
+                      style: TextStyle(
+                        fontFamily: 'Abubhabimedia',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12.sp,
+                        color: ColorConst.purple_200,
+                        decoration: TextDecoration.underline,
+                      )),
+                ],
               ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('أحدث المنتجات',
-                    style: TextStyle(
-                      fontFamily: 'Abubhabimedia',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp,
-                      color: ColorConst.purple_500,
-                    )),
-                Text('عرض الكل',
-                    style: TextStyle(
-                      fontFamily: 'Abubhabimedia',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12.sp,
-                      color: ColorConst.purple_200,
-                      decoration: TextDecoration.underline,
-                    )),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 160.h,
-            width: double.infinity,
-            child: ListView.builder(
-              itemBuilder: (context, index) => LatestProductsItem(
-                image: latestProducts[index].image!,
-                name: latestProducts[index].name!,
-                price: latestProducts[index].price!,
-              ),
-              itemCount: latestProducts.length,
-              scrollDirection: Axis.horizontal,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('المنتجات الأكثر طلبا',
-                    style: TextStyle(
-                      fontFamily: 'Abubhabimedia',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp,
-                      color: ColorConst.purple_500,
-                    )),
-                Text('عرض الكل',
-                    style: TextStyle(
-                      fontFamily: 'Abubhabimedia',
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12.sp,
-                      color: ColorConst.purple_200,
-                      decoration: TextDecoration.underline,
-                    )),
-              ],
-            ),
-          ),
-          Expanded(
-            child: GridView.builder(
+            GridView.builder(
               scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) => MostOrderedProductsItem(
                 image: mostProducts[index].image!,
                 name: mostProducts[index].name!,
@@ -161,8 +166,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 crossAxisCount: 2,
               ),
             ),
-          ),
-        ],
+
+          ],
+        ),
       ),
     );
   }
