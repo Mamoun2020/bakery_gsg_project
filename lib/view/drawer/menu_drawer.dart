@@ -1,8 +1,10 @@
+import 'package:bakery_gsg_project/view/screens/aboutus_screen/about_us_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/colors.dart';
 import '../../widgets/exit_app_widget.dart';
+import '../screens/support_screen/support_screen.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -63,13 +65,21 @@ class MenuDrawer extends StatelessWidget {
             leading: Image.asset('assets/icons/drawer/profile.png'),
             title: Text('حسابي',style: TextStyle(color: ColorConst.purple_200,fontSize: 15.sp,fontFamily: 'Abubhabimedia',fontWeight: FontWeight.w500,),),
           ),
+          //support
           ListTile(
             leading: Image.asset('assets/icons/drawer/support.png'),
             title: Text('الدعم الفني',style: TextStyle(color: ColorConst.purple_200,fontSize: 15.sp,fontFamily: 'Abubhabimedia',fontWeight: FontWeight.w500,),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => SupportScreen()));
+            },
           ),
+          //about us
           ListTile(
             leading: Image.asset('assets/icons/drawer/aboutus.png'),
             title: Text('نبذة عنا',style: TextStyle(color: ColorConst.purple_200,fontSize: 15.sp,fontFamily: 'Abubhabimedia',fontWeight: FontWeight.w500,),),
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => AboutUsScreen()));
+            },
           ),
           //Logout
           ListTile(
