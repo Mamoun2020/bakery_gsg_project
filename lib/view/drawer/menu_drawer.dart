@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../constants/colors.dart';
+import '../../widgets/exit_app_widget.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
@@ -70,11 +71,17 @@ class MenuDrawer extends StatelessWidget {
             leading: Image.asset('assets/icons/drawer/aboutus.png'),
             title: Text('نبذة عنا',style: TextStyle(color: ColorConst.purple_200,fontSize: 15.sp,fontFamily: 'Abubhabimedia',fontWeight: FontWeight.w500,),),
           ),
+          //Logout
           ListTile(
             leading: Image.asset('assets/icons/drawer/out.png'),
             title: Text('تسجيل خروج',style: TextStyle(color: ColorConst.purple_200,fontSize: 15.sp,fontFamily: 'Abubhabimedia',fontWeight: FontWeight.w500,),),
             onTap: (){
-
+              Navigator.pop(context);
+              showDialog(
+                  context: context,
+                  builder: (BuildContext ctx) {
+                    return ExitAppWidget();
+                  });
             },
           ),
         ],
